@@ -44,6 +44,10 @@ Pod::Spec.new do |s|
     sub.source_files = 'prebuilt/include/KSYBase/*.h'
     sub.vendored_library = 'prebuilt/libs/libksybase.a'
   end
+  s.subspec 'Superpowered' do |sub|
+	sub.source_files = 'Superpowered/*.h'
+	sub.vendored_library = 'Superpowered/libSuperpoweredAudioIOS.a'
+  end
   # lite version of KSYMediaPlayer (less decoders)
   s.subspec 'KSYMediaPlayer' do |sub|
     sub.source_files = 'prebuilt/include/KSYPlayer/*.h'
@@ -110,9 +114,5 @@ Pod::Spec.new do |s|
   end
   s.subspec 'KSYGPUResourceFull' do |sub|
     sub.resource = 'resource/KSYGPUResourceFull.bundle'
-  end
-  s.subspec 'Superpowered' do |sub|
-    sub.source_files =  ['Superpowered/*.h']
-	sub.vendored_library = ['Superpowered/libSuperpoweredAudioIOS.a'];
   end
 end
