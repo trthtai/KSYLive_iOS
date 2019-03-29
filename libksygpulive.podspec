@@ -111,4 +111,8 @@ Pod::Spec.new do |s|
   s.subspec 'KSYGPUResourceFull' do |sub|
     sub.resource = 'resource/KSYGPUResourceFull.bundle'
   end
+  s.subspec 'Superpowered' do |sub|
+    sub.source_files =  ['Superpowered/*.h']
+	sub.vendored_library = ['Superpowered/libSuperpoweredAudioIOS.a'];
+  end
 end
