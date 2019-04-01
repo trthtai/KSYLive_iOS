@@ -6,8 +6,6 @@
 //  Copyright © 2016 ksyun. All rights reserved.
 //
 #import "KSYGPUStreamerKit.h"
-#import "SuperpoweredIOSAudioIO.h"
-#import "SuperpoweredSimple.h"
 
 #define FLOAT_EQ( f0, f1 ) ( (f0 - f1 < 0.0001)&& (f0 - f1 > -0.0001) )
 
@@ -21,7 +19,7 @@
     BOOL           _bRetry;
     BOOL           _bInterrupt;
     KSYDummyAudioSource *_dAudioSrc;
-	SuperpoweredIOSAudioIO *audioIO;
+//	SuperpoweredIOSAudioIO *audioIO;
     // 音频采集模式（KSYAudioCapType）为AVCaptureDevice时发送静音包
     BOOL _bMute;
     KSYNetworkStatus _lastNetStatus;
@@ -124,7 +122,7 @@
     _bgmPlayer = [[KSYBgmPlayer   alloc] init];
     // 音频采集模块
     _aCapDev = [[KSYAUAudioCapture alloc] init];
-	audioIO = [[SuperpoweredIOSAudioIO alloc] initWithDelegate:(id<SuperpoweredIOSAudioIODelegate>)self preferredBufferSize:12 preferredSamplerate:44100 audioSessionCategory:AVAudioSessionCategoryPlayAndRecord channels:2 audioProcessingCallback:audioProcessing clientdata:(__bridge void *)self];
+//	audioIO = [[SuperpoweredIOSAudioIO alloc] initWithDelegate:(id<SuperpoweredIOSAudioIODelegate>)self preferredBufferSize:12 preferredSamplerate:44100 audioSessionCategory:AVAudioSessionCategoryPlayAndRecord channels:2 audioProcessingCallback:audioProcessing clientdata:(__bridge void *)self];
     // 各种图片
     _logoPic = nil;
     _textPic = nil;
@@ -229,7 +227,7 @@ static bool audioProcessing(void *clientdata, float **inputBuffers, unsigned int
     [_bgmPlayer    stopPlayBgm];
     [_streamerBase stopStream];
 //    [_aCapDev      stopCapture];
-	[audioIO stop];
+//	[audioIO stop];
     [_vCapDev      stopCameraCapture];
     [_vCapDev      removeAudioInputsAndOutputs];
     
@@ -543,7 +541,7 @@ static bool audioProcessing(void *clientdata, float **inputBuffers, unsigned int
         //配置audioSession的方法由init移入startPreview，防止在init之后，startPreview之前被外部修改
         [AVAudioSession sharedInstance].bInterruptOtherAudio = _bInterrupt;
 //        [_aCapDev startCapture];
-		[audioIO start];
+//		[audioIO start];
         [_quitLock unlock];
         [self newCaptureState:KSYCaptureStateCapturing];
     });
@@ -597,8 +595,8 @@ static bool audioProcessing(void *clientdata, float **inputBuffers, unsigned int
     // 回到前台, 重新连接预览
     [self setupVMixer];
 //    [_aCapDev  resumeCapture];
-	[audioIO start];
-    
+//	[audioIO start];
+	
     if (_audioCaptureType == KSYAudioCap_AVCaptureDevice) {
         _bMute = NO;
         // 停止 dummy audio source
@@ -1360,11 +1358,11 @@ kGPUImageRotateRight, kGPUImageRotateLeft,  kGPUImageRotate180,  kGPUImageNoRota
     if (audioCaptureType == KSYAudioCap_AudioUnit) {
         [_vCapDev removeAudioInputsAndOutputs];
 
-		if (audioIO)
-		{
-			audioIO = [[SuperpoweredIOSAudioIO alloc] initWithDelegate:(id<SuperpoweredIOSAudioIODelegate>)self preferredBufferSize:12 preferredSamplerate:44100 audioSessionCategory:AVAudioSessionCategoryPlayAndRecord channels:2 audioProcessingCallback:audioProcessing clientdata:(__bridge void *)self];
-		}
-		[audioIO start];
+//		if (audioIO)
+//		{
+//			audioIO = [[SuperpoweredIOSAudioIO alloc] initWithDelegate:(id<SuperpoweredIOSAudioIODelegate>)self preferredBufferSize:12 preferredSamplerate:44100 audioSessionCategory:AVAudioSessionCategoryPlayAndRecord channels:2 audioProcessingCallback:audioProcessing clientdata:(__bridge void *)self];
+//		}
+//		[audioIO start];
 
 //        if (!_aCapDev) {
 //            _aCapDev = [[KSYAUAudioCapture alloc] init];
@@ -1379,7 +1377,7 @@ kGPUImageRotateRight, kGPUImageRotateLeft,  kGPUImageRotate180,  kGPUImageNoRota
 //        };
     }else if (audioCaptureType == KSYAudioCap_AVCaptureDevice) {
         _aCapDev = nil;
-		audioIO = nil;
+//		audioIO = nil;
         [_vCapDev addAudioInputsAndOutputs];
 
         // 创建 dummy audio source
