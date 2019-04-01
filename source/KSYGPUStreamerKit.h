@@ -418,6 +418,9 @@ FOUNDATION_EXPORT NSString *const KSYCaptureStateDidChangeNotification NS_AVAILA
  */
 @property(nonatomic, copy) void(^pcmProcessingCallback)(uint8_t** pData, int len, const AudioStreamBasicDescription* fmt, CMTime timeInfo);
 
+@property(nonatomic, copy) void(^superpoweredProcessingCallback)(float** outputBuffer);
+
+
 /** 音频通路数据类型 */
 typedef NS_ENUM(NSInteger, KSYAudioDataType){
     /// 音频数据采用CMSampleBuffer传递
