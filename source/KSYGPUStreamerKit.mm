@@ -120,7 +120,7 @@
     // 创建背景音乐播放模块
     _bgmPlayer = [[KSYBgmPlayer   alloc] init];
     // 音频采集模块
-    _aCapDev = [[KSYAUAudioCapture alloc] init];
+//    _aCapDev = [[KSYAUAudioCapture alloc] init];
     // 各种图片
     _logoPic = nil;
     _textPic = nil;
@@ -212,7 +212,7 @@
 - (void) closeKit{
     [_bgmPlayer    stopPlayBgm];
     [_streamerBase stopStream];
-    [_aCapDev      stopCapture];
+//    [_aCapDev      stopCapture];
     [_vCapDev      stopCameraCapture];
     [_vCapDev      removeAudioInputsAndOutputs];
     
@@ -342,25 +342,25 @@
 - (void) setupAudioPath {
     weakObj(self);
     //1. 音频采集, 语音数据送入混音器
-    if (_audioDataType == KSYAudioData_CMSampleBuffer) {
-        _aCapDev.audioProcessingCallback = ^(CMSampleBufferRef buf){
-            if ( selfWeak.audioProcessingCallback ){
-                selfWeak.audioProcessingCallback(buf);
-            }
-            [selfWeak mixAudio:buf to:selfWeak.micTrack];
-        };
-    }
-    else {
-        _aCapDev.pcmProcessingCallback = ^(uint8_t **pData, int len, const AudioStreamBasicDescription *fmt, CMTime timeInfo) {
-            if ( selfWeak.pcmProcessingCallback ){
-                selfWeak.pcmProcessingCallback(pData, len, fmt, timeInfo);
-            }
-            if (![selfWeak.streamerBase isStreaming]){
-                return;
-            }
-            [selfWeak.aMixer processAudioData:pData nbSample:len withFormat:fmt timeinfo:timeInfo of:selfWeak.micTrack];
-        };
-    }
+//    if (_audioDataType == KSYAudioData_CMSampleBuffer) {
+//        _aCapDev.audioProcessingCallback = ^(CMSampleBufferRef buf){
+//            if ( selfWeak.audioProcessingCallback ){
+//                selfWeak.audioProcessingCallback(buf);
+//            }
+//            [selfWeak mixAudio:buf to:selfWeak.micTrack];
+//        };
+//    }
+//    else {
+//        _aCapDev.pcmProcessingCallback = ^(uint8_t **pData, int len, const AudioStreamBasicDescription *fmt, CMTime timeInfo) {
+//            if ( selfWeak.pcmProcessingCallback ){
+//                selfWeak.pcmProcessingCallback(pData, len, fmt, timeInfo);
+//            }
+//            if (![selfWeak.streamerBase isStreaming]){
+//                return;
+//            }
+//            [selfWeak.aMixer processAudioData:pData nbSample:len withFormat:fmt timeinfo:timeInfo of:selfWeak.micTrack];
+//        };
+//    }
     //2. 背景音乐播放,音乐数据送入混音器
     _bgmPlayer.audioDataBlock = ^ BOOL(uint8_t** pData, int len, const AudioStreamBasicDescription* fmt, CMTime pts){
         if ([selfWeak.streamerBase isStreaming]) {
@@ -525,7 +525,7 @@
         [_quitLock lock];
         //配置audioSession的方法由init移入startPreview，防止在init之后，startPreview之前被外部修改
         [AVAudioSession sharedInstance].bInterruptOtherAudio = _bInterrupt;
-        [_aCapDev startCapture];
+//        [_aCapDev startCapture];
         [_quitLock unlock];
         [self newCaptureState:KSYCaptureStateCapturing];
     });
@@ -578,7 +578,7 @@
 - (void) appBecomeActive{
     // 回到前台, 重新连接预览
     [self setupVMixer];
-    [_aCapDev  resumeCapture];
+//    [_aCapDev  resumeCapture];
 	
     if (_audioCaptureType == KSYAudioCap_AVCaptureDevice) {
         _bMute = NO;
@@ -1341,7 +1341,7 @@ kGPUImageRotateRight, kGPUImageRotateLeft,  kGPUImageRotate180,  kGPUImageNoRota
     if (audioCaptureType == KSYAudioCap_AudioUnit) {
         [_vCapDev removeAudioInputsAndOutputs];
     }else if (audioCaptureType == KSYAudioCap_AVCaptureDevice) {
-        _aCapDev = nil;
+//        _aCapDev = nil;
         [_vCapDev addAudioInputsAndOutputs];
 
         // 创建 dummy audio source
