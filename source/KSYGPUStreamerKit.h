@@ -101,7 +101,7 @@
 /**
  @abstract  音频采集设备 Audio Unit 音频采集
  */
-@property (nonatomic, readonly) KSYAUAudioCapture      *aCapDev;
+//@property (nonatomic, readonly) KSYAUAudioCapture      *aCapDev;
 
 /**
  @abstract  背景音乐播放器
