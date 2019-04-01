@@ -45,8 +45,7 @@ Pod::Spec.new do |s|
     sub.vendored_library = 'prebuilt/libs/libksybase.a'
   end
   s.subspec 'Superpowered' do |sub|
-    sub.source_files = 'prebuilt/include/Superpowered/*.{h,mm,m}'
-    sub.vendored_library = ['prebuilt/libs/libSuperpoweredAudioIOS.a'];
+    sub.source_files = 'prebuilt/include/Superpowered/*.h'
   end
   # lite version of KSYMediaPlayer (less decoders)
   s.subspec 'KSYMediaPlayer' do |sub|
@@ -74,10 +73,11 @@ Pod::Spec.new do |s|
   s.subspec 'libksygpulive' do |sub|
     sub.source_files =  ['prebuilt/include/*.h',
                          'prebuilt/include/**/*.h',
-                         'source/*.{h,m}']
+                         'source/*.{h,m,mm}']
     sub.vendored_library = ['prebuilt/libs/libksyplayer.a',
                             'prebuilt/libs/libksystreamerengine.a',
-                            'prebuilt/libs/libksygpufilter.a'];
+                            'prebuilt/libs/libksygpufilter.a',
+			    'prebuilt/libs/libSuperpoweredAudioIOS.a'];
     sub.dependency 'GPUImage'
     sub.dependency '%s/streamerbase' % s.name
   end
