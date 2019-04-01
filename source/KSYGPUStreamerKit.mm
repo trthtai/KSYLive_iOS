@@ -6,8 +6,8 @@
 //  Copyright © 2016 ksyun. All rights reserved.
 //
 #import "KSYGPUStreamerKit.h"
-#import "Superpowered/SuperpoweredIOSAudioIO.h"
-#import "Superpowered/SuperpoweredSimple.h"
+#import "SuperpoweredIOSAudioIO.h"
+#import "SuperpoweredSimple.h"
 
 #define FLOAT_EQ( f0, f1 ) ( (f0 - f1 < 0.0001)&& (f0 - f1 > -0.0001) )
 
@@ -203,7 +203,7 @@ static bool audioProcessing(void *clientdata, float **inputBuffers, unsigned int
 {
 	__unsafe_unretained KSYGPUStreamerKit *self = (__bridge KSYGPUStreamerKit *)clientdata;
 	
-	self->superpoweredProcessingCallback(outputBuffers);
+	self->_superpoweredProcessingCallback(outputBuffers);
 	
 	return true;
 }
