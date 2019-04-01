@@ -197,17 +197,17 @@
     return [self initWithDefaultCfg];
 }
 
-static bool audioProcessing(void *clientdata, float **inputBuffers, unsigned int inputChannels, float **outputBuffers, unsigned int outputChannels, unsigned int numberOfSamples, unsigned int samplerate, uint64_t hostTime)
-{
-	__unsafe_unretained KSYGPUStreamerKit *self = (__bridge KSYGPUStreamerKit *)clientdata;
-	
-	if (self->_superpoweredProcessingCallback)
-	{
-		self->_superpoweredProcessingCallback(outputBuffers);
-	}
-	
-	return true;
-}
+//static bool audioProcessing(void *clientdata, float **inputBuffers, unsigned int inputChannels, float **outputBuffers, unsigned int outputChannels, unsigned int numberOfSamples, unsigned int samplerate, uint64_t hostTime)
+//{
+//	__unsafe_unretained KSYGPUStreamerKit *self = (__bridge KSYGPUStreamerKit *)clientdata;
+//	
+//	if (self->_superpoweredProcessingCallback)
+//	{
+//		self->_superpoweredProcessingCallback(outputBuffers);
+//	}
+//
+//	return true;
+//}
 
 - (void)dealloc {
     [_quitLock lock];
