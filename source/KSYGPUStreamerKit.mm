@@ -203,7 +203,10 @@ static bool audioProcessing(void *clientdata, float **inputBuffers, unsigned int
 {
 	__unsafe_unretained KSYGPUStreamerKit *self = (__bridge KSYGPUStreamerKit *)clientdata;
 	
-	self->_superpoweredProcessingCallback(outputBuffers);
+	if (self->_superpoweredProcessingCallback)
+	{
+		self->_superpoweredProcessingCallback(outputBuffers);
+	}
 	
 	return true;
 }
