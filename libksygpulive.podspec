@@ -28,8 +28,6 @@ Pod::Spec.new do |s|
   # Exclude optional Search and Testing modules
   s.default_subspec = 'libksygpulive'
 
-  s.dependency 'AudioKit'
-
   # Internal dependency 
   subLibs = [ 'yuv','mediacodec',
               'mediacore_dec_lite',
