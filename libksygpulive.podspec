@@ -78,6 +78,7 @@ Pod::Spec.new do |s|
                             'prebuilt/libs/libksystreamerengine.a',
                             'prebuilt/libs/libksygpufilter.a'];
     sub.dependency 'GPUImage'
+    sub.dependency 'AudioKit'
     sub.dependency '%s/streamerbase' % s.name
   end
   s.subspec 'libksygpulive_noKit' do |sub|
@@ -114,5 +115,4 @@ Pod::Spec.new do |s|
   s.subspec 'KSYGPUResourceFull' do |sub|
     sub.resource = 'resource/KSYGPUResourceFull.bundle'
   end
-  s.dependency = 'AudioKit'
 end
