@@ -73,11 +73,10 @@ Pod::Spec.new do |s|
   s.subspec 'libksygpulive' do |sub|
     sub.source_files =  ['prebuilt/include/*.h',
                          'prebuilt/include/**/*.h',
-                         'source/*.{h,m,mm}']
+                         'source/*.{h,m}']
     sub.vendored_library = ['prebuilt/libs/libksyplayer.a',
                             'prebuilt/libs/libksystreamerengine.a',
-                            'prebuilt/libs/libksygpufilter.a',
-			    'prebuilt/libs/libSuperpoweredAudioIOS.a'];
+                            'prebuilt/libs/libksygpufilter.a'];
     sub.dependency 'GPUImage'
     sub.dependency '%s/streamerbase' % s.name
   end
@@ -115,4 +114,5 @@ Pod::Spec.new do |s|
   s.subspec 'KSYGPUResourceFull' do |sub|
     sub.resource = 'resource/KSYGPUResourceFull.bundle'
   end
+  s.dependency = 'AudioKit'
 end
