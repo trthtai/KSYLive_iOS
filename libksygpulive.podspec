@@ -79,6 +79,7 @@ Pod::Spec.new do |s|
                             'prebuilt/libs/libksygpufilter.a'];
     sub.dependency 'GPUImage'
     sub.dependency '%s/streamerbase' % s.name
+    sub.dependency 'AudioKit'
   end
   s.subspec 'libksygpulive_noKit' do |sub|
     sub.source_files =  ['prebuilt/include/*.h',
