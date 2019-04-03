@@ -28,6 +28,8 @@ Pod::Spec.new do |s|
   # Exclude optional Search and Testing modules
   s.default_subspec = 'libksygpulive'
 
+  s.dependency 'AudioKit'
+
   # Internal dependency 
   subLibs = [ 'yuv','mediacodec',
               'mediacore_dec_lite',
@@ -78,7 +80,6 @@ Pod::Spec.new do |s|
                             'prebuilt/libs/libksystreamerengine.a',
                             'prebuilt/libs/libksygpufilter.a'];
     sub.dependency 'GPUImage'
-    sub.dependency 'AudioKit'
     sub.dependency '%s/streamerbase' % s.name
   end
   s.subspec 'libksygpulive_noKit' do |sub|
